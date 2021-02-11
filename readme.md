@@ -89,7 +89,21 @@
                 - e.g. constructor(private a:number ,private b: number)
                     - a,b are private members of class   
                 - e.g. constructor(public a:number ,public b: number)
-                    - a,b are public members of class                
+                    - a,b are public members of class           
+    - Generics
+        - reusable data structure for type-safe data
+        - Custom Funcationalities for data structure
+            -  Perform compare operations but not mathemati al operations
+        - Generic
+            - Class
+            - Mehod
+            - Property
+            - Interface
+            - Data Members    
+    - Modules
+        - A Modular pattern that is used to separate logic in separate code files (.ts /.js)
+        - The 'export' keyword, that exports the type
+        - the 'import' keyword, that imports the exported type        
 
 Hands-on lab
 1. Self Study of differences between == and === in TypeScript aka ES6
@@ -104,3 +118,104 @@ Hands-on lab
         - FInd out number of words and statements in the string.
         - Change the string in Title Case (First character of each word in uppercase)
         - find out how many times the word 'the', 'of', 'and' occures in the string        
+
+# Angular Programming
+
+1. Create a Angular Project using Angular CLI
+    - The Command line tool to create Angular Project with
+        - Standard Modules
+        - Dev / Test / Build / Release Project Structure
+        - Dependeicy Configurations
+        - Default Dev Server Configiration
+    - The Command to install Angular CLI in GLobal Scope    
+        - npm install -g @angular/cli
+            - Provides the 'ng' utility
+                - ng serve
+                    - host the app on DevServer and process the Http Request for responding Angular Build / output files to browser
+                - ng build
+                    - build the project for Production and Release
+                - ng test
+                    - Run Test        
+        - Create Angular Project using CLI
+            - ng new <PROJECT-NAME>
+- Angular Eco-System
+    - @angular/compiler
+        - Standard Ahead-of-Time (AOT) Compiler
+            - Compile and compress the Output build upto 80% of the original Source code size
+                - Converts the HTML Template (html file) and TypeScript code into optimized (aka Compressed) JavaScript before the browser downloads and run the code                       
+            - Angular 9 with Ivy
+                - AOT Enhancements for 90% of the Optimization   
+        - Just-In-Time Compiler (JIT)
+            - compiles the app in browser at runtime
+                - Good forTesting or during development
+    - @angular/common
+        - The Modules for the Managing the HTML Rendering in the browser when the app is divided into several independent modules
+            - CommonModule
+        - @angular/common/http
+            - For all HTTP operations         
+    - @angular/platform-browser-dynamic
+        - Boostrap the First Angular Module in browser (aka Load the Angular app for exdecution)
+    - @angular/platform-browser
+        - Take the responsibility of Rendering all COmponents (Base Module as well as from referred modules)       
+            - BrowserModule (Mandatory Module class for Execution)              
+    - @angular/core
+        - The Angular Framework's core classes
+            - NgModule
+            - Component
+            - Directive
+            - Pipe
+            - Injectable
+            - Input
+            - Output
+            - HostListener
+            - Renderer2
+            - EventEmitter
+    - @angular/forms
+        - For Databinding
+            - FormsModule
+        - Reactive Forms
+            - ReactoveFormsModule
+    - @angular/router
+        - Single  Page Application
+            - RouterModule
+    - @angular/element
+        - Creating Custom Element in Angular App
+
+- The package.json
+    - The Command to create the package.json
+        - npm init -y
+    - Sections
+        - "scripts"
+            - Section to contain commands for
+                - Test
+                    - npm run test
+                - Start
+                    - npm run start
+                        - execute the "start" switch from "scripts", this will execute the command set as value of "start"
+                            - "start" : "ng serve"
+                            - npm run start commad will execute "ng serve"
+                - Build
+                    - npm run build
+        - "devDependencies"
+            - Contains list of all packages used during development and testing
+        - "dependencies"
+            - contains list of all packages used during Production Build and execution
+            - Angular Production external dependencies
+                - rxjs
+                    - Reactive Extensions for JavaScript
+                    - Provides 'Observable' class to state management for storing data from AJAX calls
+                - zone.js
+                    - Manage the Browser Staktrace in case of any errors during execution in browser
+                - tslib
+                    - The TypeScript Library object model that will manage the ES 5 transpilation form the source code to generate JavaScript and load it in browser           
+- The TypeScript COnfiguration File
+    - tsconfig.json
+        - tsconfig.app.json
+            - TypeScript Language Cofigurations for Development and Build
+        - tsconfig.spec.json
+            - TypeScript Language Configuration for testing    
+- The Angular Application Confioguration File
+    - angular.json   
+        - Build Config
+        - Prod. Config
+        - Test Config                       
