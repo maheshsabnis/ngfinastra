@@ -72,6 +72,24 @@
         - the original array will not be changes
     - the forEach() the each element is modify first in original array and return the origianl array
         with modified values
+- Object Oriented Programming (OOPs)
+    - Modulalrity provides the modular design pattern for JavaScript
+    - Create Class with data members, properties and methods
+        - Fornt-ENd Modularity
+            - Model classes 
+                - Data Models        
+    - class members are accessed in class using 'this' reference scope object
+    - class members are public by default
+    - The 'constructor()' is a standard function tahtn occures 'only-once' in a class.
+        - constructor() can have parameters
+            - default scope is limited to constructor() function      
+                - e.g. constructor(a,b)
+                    - a,b areb scopped to constructor function
+            - Parameters with access specifier
+                - e.g. constructor(private a:number ,private b: number)
+                    - a,b are private members of class   
+                - e.g. constructor(public a:number ,public b: number)
+                    - a,b are public members of class                
 
 Hands-on lab
 1. Self Study of differences between == and === in TypeScript aka ES6
