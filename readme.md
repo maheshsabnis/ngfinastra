@@ -194,6 +194,8 @@ Hands-on lab
                         - execute the "start" switch from "scripts", this will execute the command set as value of "start"
                             - "start" : "ng serve"
                             - npm run start commad will execute "ng serve"
+                            - ng serve --prod
+                                - Create a Production Build for The Angular App for Production 
                 - Build
                     - npm run build
         - "devDependencies"
@@ -210,6 +212,8 @@ Hands-on lab
                     - The TypeScript Library object model that will manage the ES 5 transpilation form the source code to generate JavaScript and load it in browser           
 - The TypeScript COnfiguration File
     - tsconfig.json
+        - The file is created using following command
+            - tsc --init
         - tsconfig.app.json
             - TypeScript Language Cofigurations for Development and Build
         - tsconfig.spec.json
@@ -219,3 +223,130 @@ Hands-on lab
         - Build Config
         - Prod. Config
         - Test Config                       
+    - modifying angular.json to support external JS libraries or CSS
+        - First install these JS libs or CSS as "dependencies"  
+            - npm install --save <PACKAGE-NAME>
+                - e.g. npm install --save bootstrap  
+
+# Decorators
+1. It is a Concept of Deorator Design pattern and it is used by ES 6 onwards to define a behavior for ES 6 Types 
+    - e.g. Class, Method, Data Member, Property, Events, etc.                  
+2. Angular Important Decorators
+    - @NgModule feom @angular/core
+        - Decorate class as Angular Module class for executing as container
+        - Properties
+            - imports: of the type array, this defines list of all standard and custom angular modules to be loaded for the current angular application. 
+            - declarations: of the type array, this defines list of all components, custom directives and custom pips added by developer in the current project so that they will be loaded and executed.
+                - each component, custom directive and custom pipe must be declared in Entry-point module for execuion, otherwise they won't be executed and will produce runtime error if used w/o declaring.   
+            - providers: of the type array, used to provide 'Dependency Ijection container' to register all Angular Services so that they can be injected in Component/Custom Directives, etc.    
+            - bootstrap: of the type array, used to define list of Components from 'declarations' so that they can be rendered in browser by BrowserModule
+            - enrtyComponent: of the type array, used to expose the Angular COmponent as Angular Element so that third party laibrary can use it as Custom element.
+            - exports: of the type array, used to export components / services / custom directives from current module to other Angular modules.
+        - Component
+            - The decorateot applied on class to make it as Angular Component
+                - Properties
+                    - selector: the property thst is used to define a custom HTML tag so that the component can be used for execution on HTML page or HTML of other component
+                    - templateUrl:
+                        - The path for HTML file that contains UI for the current Component
+                    - template:   
+                        - the inline HTML template defined in Component source code file (Please avoid if the UI is very complex)
+                    - styleUrls: external css files used by component
+                    - style: inline CSS styles for the component            
+
+# Component and Databinding
+1. Interpolation aka Expression Binding
+    - The One time One way Binding of data from Component to UI elements
+    - Syntax
+        - <div> {{<PUBLIC-DATA-MEMBER-OF-COMPONENT>}}   </div>
+        - The Expression can be evaluated by the INterpolation e.g. {{2+3}}, will be rendered as 5
+2. Property Binding
+    - Binding public data members of Component class with attribute System of HTML Elements
+    - This is "one-Way" from Component class to UI
+    - Syntax
+        - [<HTML-ELEMENT-ATTRIBUTE>]="<PUBLIC-DATA-MEMBER-OF-COMPONENT>"
+        - e.g.
+            - <input type="text" [value]="message">
+                - The 'value' is an atribute of HTML element and message is public data member from Component
+            - [value], [href], [disabled], etc.            
+    - Angular have written a HTML parser that uses HTML stadard attribute for Property Binding. These attrbutes as executed as 'Attribute-Directives' internally          
+3. Event Binding
+    - Binding public methods of the Component class with events of HTML elements
+    - An event is reised on HTML and will be listened by the component and the  bound method will be executed
+    - This is from UI to Component
+    - Syntax
+        - (<EVENT>)="<method>()"
+        - e.g.
+            - <input type="button" (click)="display()">
+                - click is event and display() is public method of the component
+            - (click), (change), (keyup), (blur), etc.
+    - If the method bound to UI element wants to pass value of any attribute of theat UI element to the method then use the '$event' object
+        - $event is JavaScript stantd object to passs UI element's attribute value to method
+        - $event.target, is the element on which an element is raised.
+4. The two-way data binding
+    - Combination of the Property-Binding + Event-Binding
+    - SYntax:
+        - [(ngModel)]="<PUBLIC-MEMBER-FROM-COMPONENT-CLASS>"
+            - ngModel, is the attribute directve in Angular for two-way binding
+        - VERY IMP: To execute ngModel we must import 'FormsModule' from @angular/forms in @NgModule class                              
+        - ngModel listen to the default event of element on which it is applied for two-way binding
+        - It will read the data changed for the element and pass the updated data to Component for the property bound to UI element.
+        - Component will call its 'ngOnChanges()' method and digest all received changes from UI
+        - It will update all properties dependant on the property being updated from UI
+        - It will push changes back to UI
+5. The Component implements 'OnInit' interface from @angular/core
+    - This contains 'ngOnInit()'method
+        - THis will be invoked immediately aftre constructor
+        - Write the code in this method that cannot be wriiten in constructor
+            - e.g. AJAX calls, COllection Initialization, external service subscription, etc.
+
+# Angular Directives
+
+1. They are classes used to define behavior of HTML Template for the Angular Component
+2. Types of Directives
+    - Component Directive
+        - Each Angular Component is a reusable directive
+        - Custom Controls with UI, Properties and Behavior (events) those are re-usable
+        - This must be generalized based on requirements
+            - What will be the UI of the component directive?
+                - Plan for Standard HTML eleemnts
+            - How the component directive will communicate with its parent?
+                - Plan for Data Properties of which values to be accepted from parent component
+            - How the component directive will emit data to parent component?
+                - Plan for Events       
+        - Parent-Child Relationship across components
+            - The parent must pass data to child component and child component must acceopts the data as input
+                - The child component must have a public get/set property decorated with @Input() decorator from @angular/core
+                    - The property decorated as @Input() will be used for Property Binding when this component is used by Parent Component
+                    - e.g. @Input()myProprty;
+                    - <my-child-component [myProperty]="<PROPERTY-FROMPARENT-COMPONENT>">
+            - The child component must emit data to parent component and parent must subscribe to the data emitted
+                - USe the EventEmitter<T> class from @angular/core
+                    - T is the data type thet child wants to emit
+                    - The 'emit()' method of this class will emit the data
+                - Decorate the public property of the type EventEmitter<T> with @Output() from @angular/core        
+                    - The parent will subscribe to the event emitter from child to parent using event binding
+                        - e.g. @Output()notified:EventEmitter<any>
+                    - Parent component
+                        <my-child-component (notified)="<METHOD-FROM-PARENT-COMPONENT>($event)">    
+    - Attribute Directive
+        - They are custom attributes for HTML elements
+            - ngModel
+        - Generally we can have cutsom attribute directives
+    -Structural Directives
+        - USed to Add / Remove DOM dynamically based on condition
+        - e.g.
+            - *ngFor, the for..of loop to generate HTML elements based on Collections
+            - *ngIf, dynamically add / remove DOM based on condition
+            - *ngSwitch ... ngSwitchCase              
+
+
+
+
+
+# Angular Hands-on-Lab
+
+1. Create a Calculator Component like Calculator on Windows OD / Linux / MacOS (Immediate)
+2. Modify the Employee Component for following operations
+    - Make sure that EmpNo is not duplicated (Do not use Pipes from google) receiveDesignation
+    - When a row is selected from Table, it must be displayed in  TextBoxes and Select, the user should be ale to update it. receiveDesignation
+    - Generate Delete button for each table row to delete row.

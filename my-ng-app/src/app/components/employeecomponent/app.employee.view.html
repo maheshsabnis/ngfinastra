@@ -1,0 +1,85 @@
+<h2>Employee Component</h2>
+<div class="container">
+  <table class="table table-bordered table-striped">
+    <tbody>
+      <tr>
+        <td>EmpNo</td>
+        <td>EmpName</td>
+        <td>Department</td>
+        <td>Designation</td>
+        <td>Salary</td>
+      </tr>
+      <tr>
+        <td>
+           <input type="text" class="form-control" [(ngModel)]="emp.EmpNo">
+        </td>
+        <td>
+          <input type="text" class="form-control" [(ngModel)]="emp.EmpName">
+       </td>
+       <td>
+         <app-dropdown-component [DataSoure]="departments"
+            (notifyBack)="receiveDeptName($event)"></app-dropdown-component>
+        <!-- <select class="form-control" [(ngModel)]="emp.DeptName">
+          <option *ngFor="let dept of departments" value="{{dept}}">{{dept}}</option>
+        </select> -->
+       </td>
+        <td>
+          <app-dropdown-component [DataSoure]="designations"
+          (notifyBack)="receiveDesignation($event)" ></app-dropdown-component>
+          <!-- <select class="form-control" [(ngModel)]="emp.Designation">
+            <option *ngFor="let desig of designations" value="{{desig}}">{{desig}}</option>
+          </select> -->
+        </td>
+        <td>
+          <input type="text" class="form-control" [(ngModel)]="emp.Salary">
+       </td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <input type="button" value="Save" class="btn btn-success" (click)="save()">
+        </td>
+        <td colspan="2">
+          <input type="button" value="Clear" class="btn btn-warning" (click)="clear()">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <div class="contaier">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>EmpNo</th>
+          <th>EmpName</th>
+          <th>DeptName</th>
+          <th>Designation</th>
+          <th>Salary</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emp of employees" (click)="getSelectedEmp(emp)">
+          <td>{{emp.EmpNo}}</td>
+          <td>{{emp.EmpName}}</td>
+          <td>{{emp.DeptName}}</td>
+          <td>{{emp.Designation}}</td>
+          <td>{{emp.Salary}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- <h5>Dynamic Table</h5>
+    <table class="table table-bordered table-striped">
+      <thead>
+          <tr>
+            <th *ngFor="let col of columnHeaders">{{col}}</th>
+          </tr>
+      </thead>
+      <tbody>
+         <tr *ngFor="let prd of employees">
+           <td *ngFor="let col of columnHeaders">
+            {{prd[col]}}
+           </td>
+         </tr>
+      </tbody>
+    </table> -->
+  </div>
+</div>

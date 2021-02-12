@@ -1,0 +1,4 @@
+<select class="form-control"
+   (change)="onNotifyBack($event)">
+  <option *ngFor="let item of DataSource" value="{{item}}">{{item}}</option>
+</select>
