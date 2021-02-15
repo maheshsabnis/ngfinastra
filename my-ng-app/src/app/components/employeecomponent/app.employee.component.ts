@@ -25,10 +25,7 @@ export class EmployeeComponent implements OnInit {
     this.employees = this.logic.getEmployees();
     console.log(JSON.stringify(this.employees));
     // read all keys of the 0th record of the employees array
-    for(let c of Object.keys(this.employees[0])){
-      this.columnHeaders.push(c);
-    }
-    console.log(this.columnHeaders);
+    this.columnHeaders  =Object.keys(this.emp);
   }
 
   save():void {

@@ -339,6 +339,94 @@ Hands-on lab
             - *ngIf, dynamically add / remove DOM based on condition
             - *ngSwitch ... ngSwitchCase              
 
+# Angular Programming Needs
+1. Data Verification for the values entered by End-User
+    - Client-Side Validations
+        - JavaScript for Async PostBack for Server-Side Validations
+            - UserName / Password
+            - Identity Validations
+                - Credit Card
+                - Account No. Validation 
+        - Pure Front-End Side Validations written in JavaScript
+            - Client-Side Validators
+                - Basic Validations
+                    - Required
+                    - Min / Max
+                    - MinLength / MaxLength
+                - Value Basedx Validations
+                    - Pattern
+                    - Email
+                    - null
+                    - RequiredTrue
+                - Custom Validations (Powerful)
+                    - Domain-Specific Clien-Side Validations               
+            - @angular/forms
+                - Template Forms
+                    - Basic HTML Form for Accespting Data as a ngModel
+                - Reactive Forms
+                    -  Industry Standard Mechanism for Processing 'form' as a single Model object that is postback with data validations  
+                        - ReactiveFormsModule
+                            - FormGroup
+                                - the form object with FormControls(?) inside it
+                                - defines Key/Value pair of the FormModel binding with <form> tag
+                                    - key is the identification of UI element
+                                    - valie is the Property from the mode class
+                                - Property
+                                    - The 'value' property represents the Key/Value pair for all formControls submitted based in form-submit     
+                                - Method
+                                    - The 'setValue()' will be used to set value for FormGroup    
+                            - FormControl
+                                - represents an editable element inside <form>
+                                - this element is bind with the Form-Model object using FormGroup   
+                                - this class accepts 2 parameters to its ctor
+                                    - formState, the value entered in UI elekentn bound with formControl using 'formControlName'  
+                                    - The ValidatorOptions
+                                        - nullbale
+                                - Property
+                                    - The  'value' property, is value of individual formControl       
+                                  - Method
+                                    - The 'setValue()' will be used to set value for FormControl          
+                            - [formGroup], the attribute directive to bind the FormGroup object with <form>
+                            - formControlName, the attribute directive that is used to link the 'key' of form group with UI element    
+                                    - this is similar to 'name' attribute of HTML
+                            - Validators
+                                - the class having static method for validations
+                                    - required(AbstractControl)
+                                    - requiredTrue(AbstractControl)
+                                    - pattern(string | RegEx)
+                                    - min(number) / max(number)
+                                    - minLengt(number) / maxLength(null)
+                                    - email(AbstractControl)
+                                    - compose([Array]) 
+                                        - Accepts an array of validation rules to be applied / defined for proeprty of Model class    
+                                            - used for multiple validation for on single property
+                                - AbstractControl
+                                    - Base class for all UI elements          
+                                - Note: the method accept tyhe AbstractControl as inout parameter gents invopked implicitely as callback
+                                    - This implicitely reads value from the UI element     
+                            - To show validation message on UI use following
+                                - *ngIf
+                                    - Add / Remove DOM based on Validations
+                                - Validation Evaluaiton Expressions
+                                    - check if UI element is focused and changed  
+                                        - <FormGroup>.controls.<formControlName>.dirty
+                                         
+                                    - check if the property is evaluated as valid OR invalid 
+                                        - !<FormGroup>.controls.<formControlName>.valid OR 
+                                            <FormGroup>.controls.<formControlName>.invalid       
+                                    - eveluate whicha validation is failed
+                                        - <FormGroup>.controls.<formControlName>.errors.<VALIDATION-RULE-FAILED>
+                                            - e.g <FormGroup>.controls.<formControlName>.errors.required
+                                                - required validation 
+
+                            - Custom Validators
+                                - Create a class with Static method
+                                    - This method may accept premptive type or AbstractControl
+                                    - If the vaidation is successful then the method returns 'null'
+                                    - Else it will return the JSON object
+                                        - e.g. {valid:false} / {invalid:true} / {<USER-DEFINED-KEY>:false}
+                                            - <FormGroup>.controls.<formControlName>.errors.<USER-DEFINED-KEY>
+
 
 
 
@@ -350,3 +438,7 @@ Hands-on lab
     - Make sure that EmpNo is not duplicated (Do not use Pipes from google) receiveDesignation
     - When a row is selected from Table, it must be displayed in  TextBoxes and Select, the user should be ale to update it. receiveDesignation
     - Generate Delete button for each table row to delete row.
+3. Implement the Reactive Forms with the following validations
+    - Make sure that the EmpName starts from Upper Case Character (Hint: Use Regular Expression) (Immediate)
+    - Write a custom validator that will check if the EmpNo is already Present (Immediate)
+4. Create a Custom re-usable component that will show vaidation summary at the bottom of the page (later in seond half)         

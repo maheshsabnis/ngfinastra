@@ -1,0 +1,85 @@
+<h2>Employee Reactive Component</h2>
+<div class="container">
+  <!--Map the formGroup-->
+  <form [formGroup]="frmEmp" (ngSubmit)="save()">
+  <table class="table table-bordered table-striped">
+    <tbody>
+      <tr>
+        <td>EmpNo</td>
+        <td>EmpName</td>
+        <td>Department</td>
+        <td>Designation</td>
+        <td>Salary</td>
+      </tr>
+      <tr>
+        <td>
+          <!--the 'formControlName' is key of FormGroup-->
+           <input type="text"  formControlName="EmpNo"  class="form-control">
+           <div class="cotnainer"
+             class="alert alert-danger"
+              *ngIf="frmEmp.controls.EmpNo.dirty && !frmEmp.controls.EmpNo.valid"
+           >
+            <p *ngIf="frmEmp.controls.EmpNo.errors?.required">EmpNo is required</p>
+            <p *ngIf="frmEmp.controls.EmpNo.errors?.minlength">EmpNo must be miniumn 2 digits in length</p>
+            <p *ngIf="frmEmp.controls.EmpNo.errors?.maxlength">EmpNo can be 6 digits in max length</p>
+            <p *ngIf="frmEmp.controls.EmpNo.errors?.pattern">EmpNo must be numeric</p>
+            <!--The customvalidator for even / odd check-->
+            <p *ngIf="!frmEmp.controls.EmpNo.errors?.even">EmpNo must be even number</p>
+          </div>
+        </td>
+        <td>
+          <input type="text" formControlName="EmpName" class="form-control" >
+       </td>
+       <td>
+
+        <select class="form-control" formControlName="DeptName" >
+          <option *ngFor="let dept of departments" value="{{dept}}">{{dept}}</option>
+        </select>
+       </td>
+        <td>
+
+          <select class="form-control" formControlName="Designation" >
+            <option *ngFor="let desig of designations" value="{{desig}}">{{desig}}</option>
+          </select>
+        </td>
+        <td>
+          <input type="text" formControlName="Salary" class="form-control">
+       </td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <!--Disabl the submit button if the form is invalid-->
+          <input type="submit" [disabled]="!frmEmp.valid" value="Save" class="btn btn-success">
+        </td>
+        <td colspan="2">
+          <input type="button" value="Clear" class="btn btn-warning" (click)="clear()">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</form>
+  <br>
+  <div class="contaier">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>EmpNo</th>
+          <th>EmpName</th>
+          <th>DeptName</th>
+          <th>Designation</th>
+          <th>Salary</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emp of employees" (click)="getSelectedEmp(emp)">
+          <td>{{emp.EmpNo}}</td>
+          <td>{{emp.EmpName}}</td>
+          <td>{{emp.DeptName}}</td>
+          <td>{{emp.Designation}}</td>
+          <td>{{emp.Salary}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

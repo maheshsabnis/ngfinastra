@@ -1,5 +1,6 @@
 <h2>Employee Component</h2>
 <div class="container">
+
   <table class="table table-bordered table-striped">
     <tbody>
       <tr>
@@ -11,7 +12,7 @@
       </tr>
       <tr>
         <td>
-           <input type="text" class="form-control" [(ngModel)]="emp.EmpNo">
+           <input type="text"   class="form-control" [(ngModel)]="emp.EmpNo">
         </td>
         <td>
           <input type="text" class="form-control" [(ngModel)]="emp.EmpName">
@@ -36,7 +37,7 @@
       </tr>
       <tr>
         <td colspan="3">
-          <input type="button" value="Save" class="btn btn-success" (click)="save()">
+          <input type="submit" value="Save" class="btn btn-success" (click)="save()">
         </td>
         <td colspan="2">
           <input type="button" value="Clear" class="btn btn-warning" (click)="clear()">
@@ -44,6 +45,7 @@
       </tr>
     </tbody>
   </table>
+
   <br>
   <div class="contaier">
     <table class="table table-bordered table-striped">
@@ -66,17 +68,17 @@
         </tr>
       </tbody>
     </table>
-    <!-- <h5>Dynamic Table</h5>
-    <table class="table table-bordered table-striped">
+    <h5>Dynamic Table</h5>
+    <!-- <table class="table table-bordered table-striped">
       <thead>
           <tr>
             <th *ngFor="let col of columnHeaders">{{col}}</th>
           </tr>
       </thead>
       <tbody>
-         <tr *ngFor="let prd of employees">
+         <tr *ngFor="let emp of employees">
            <td *ngFor="let col of columnHeaders">
-            {{prd[col]}}
+              {{emp[col]}}
            </td>
          </tr>
       </tbody>
