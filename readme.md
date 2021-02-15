@@ -455,6 +455,29 @@ Injectable: the decorator for defining class as a class to be registered as a An
      applications on the page.
    - 'any' : Provides a unique instance in each lazy loaded module while all eagerly loaded modules share one instance.
 
+# Angular Services HTTP Calls
+1. @angular/common/http
+    - HttpClientModule
+        - Platform for for HTTP Calls
+    - HttpClient
+        - Manages all HTTP Requests
+            - get() / post() /put() / delete()
+            - All methods responds Observable<T>
+                - Observable<T>
+                    - Container for T Response
+                        - T, Object, Array, Staring, Text, Xml, JSON, BLOB (http 2.0), ArrayBuffer (http2.0)
+                    - rxjs library
+                        - Observable.fork()
+                            - help parallel calls for multiple REST APIs    
+    - HttpHeaders
+        - Used to Pass headers
+            - post() / put() , mandatory
+            - secure calls
+2. Role based access for REST APIs calls
+    - Routes with Guard     
+3. Attribute Directives
+4. Elements                           
+
 
 
 
