@@ -427,6 +427,33 @@ Hands-on lab
                                         - e.g. {valid:false} / {invalid:true} / {<USER-DEFINED-KEY>:false}
                                             - <FormGroup>.controls.<formControlName>.errors.<USER-DEFINED-KEY>
 
+# ANgular Service
+
+``` JavaScript
+import { Injectable } from "@angular/core";
+
+
+@Injectable({
+  providedIn:'root'
+})
+export class UtilityService {
+   getLength(str:string):number {
+     return str.length;
+   }
+   changeCase(str:string, c:string):string{
+    if(c === "U") return str.toUpperCase();
+    if(c === "L") return str.toLowerCase();
+    return str;
+   }
+}
+
+```
+Injectable: the decorator for defining class as a class to be registered as a Angular Service class in DI COntainer
+
+  - 'root' : The application-level injector in most apps.
+  - 'platform' : A special singleton platform injector shared by all
+     applications on the page.
+   - 'any' : Provides a unique instance in each lazy loaded module while all eagerly loaded modules share one instance.
 
 
 
@@ -441,4 +468,5 @@ Hands-on lab
 3. Implement the Reactive Forms with the following validations
     - Make sure that the EmpName starts from Upper Case Character (Hint: Use Regular Expression) (Immediate)
     - Write a custom validator that will check if the EmpNo is already Present (Immediate)
-4. Create a Custom re-usable component that will show vaidation summary at the bottom of the page (later in seond half)         
+4. Create a Custom re-usable component that will show vaidation summary at the bottom of the page (later in seond half)      
+5. CReate a Search Component that will have a TextBox. This component will act as a Gloabl / Site Level search for the vaious components currently loaded. Lets this component accept the Search String e.g. Manufacturer = "IBM". The page will have 3 components i.e. SearchComponent and components showing data of Products, Orders. When the value as "IBM" entered in searched textbox, Only products manufcaturered by IBM and Orders for IBM products to be shown in Products and Orders component    
