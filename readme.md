@@ -534,3 +534,4 @@ Injectable: the decorator for defining class as a class to be registered as a An
     - The Table Columns and Rows must be generated based on data present in DataSource
     - The Element must have an event that will emit the selected row data to its consumer
     - The Element must have 'CanDelete' property, if this property is true then each row should generate as Delete button. When this button is clicked the record must be deleted from its consumer.  
+7. Modify The Routing App by completing the Create / Edit View for Performing Create and Edit operations. Modify the ProductList for having the Delete button to delete the record  by navigating the DeleteComponent. This component will show the record to be deleted.    
