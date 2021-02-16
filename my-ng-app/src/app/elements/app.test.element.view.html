@@ -1,0 +1,9 @@
+<h2>The Custom Element</h2>
+
+<div class="container">
+  <strong>{{message}}</strong>
+  <hr>
+  <select class="form-control" (change)="onSelectionCanged($event)">
+     <option *ngFor="let rec  of Source" value="{{rec}}">{{rec}}</option>
+  </select>
+</div>

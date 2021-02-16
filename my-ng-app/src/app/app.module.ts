@@ -1,7 +1,17 @@
-import { NgModule } from '@angular/core';
+import { MainComponent } from './components/routingapp/app.main.component';
+import { EditProductComponent } from './components/routingapp/app.editproduct.component';
+import { CreateProductComponent } from './components/routingapp/app.createproduct.component';
+import { ProductListComponent } from './components/routingapp/app.productlist.component';
+import { ElementConsumerComponent } from './components/elementconsumer/app.elementconsumer.component';
+import { CommunicationService } from './services/app.communication.services';
+// CUSTOM_ELEMENTS_SCHEMA: is a bridge between the DOM and Angular
+// ecosystem for providing a instance of Custom Element to the Browser's DOM
+import { NgModule, Injector, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 // FormsModule: USed for Basic Angular Forms and ngModel for two-way binding
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+// HttpClientModule for Http Communication from Angular App
+import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EmployeeComponent } from "./components/employeecomponent/app.employee.component";
@@ -11,21 +21,60 @@ import { UtilityService } from "./services/app.utility.service";
 import { UtilityServiceComponent } from "./components/utilityservicecomponent/app.utilityservce.cmponent";
 import { DeptSenderComponent } from "./components/servicecommunicationcomponents/app.deptsender.component";
 import { EmpReceiverComponent } from "./components/servicecommunicationcomponents/app.empreceiver.component";
+import { HttpServiceComponent } from "./components/httpservicecomponent/app.httpservice.component";
+
+
+// impoer the createCustomElement()
+
+import { createCustomElement } from "@angular/elements";
+
+// importing the component that will act as an Element
+import { TestElementComponent } from "./elements/app.test.element";
+
+
+
 // BrowserModule: The module responsible for rendering the Angular application in the browser
 // We can have 'only-one' instance of BrowserModule per angular application
 
 @NgModule({
   declarations: [
     AppComponent, EmployeeComponent,DropDownComponent,
-    EmployeeReactiveFormComponent,
-    DeptSenderComponent,EmpReceiverComponent
+    EmployeeReactiveFormComponent,HttpServiceComponent,
+    DeptSenderComponent,EmpReceiverComponent,
+    TestElementComponent,
+     ElementConsumerComponent,
+     ProductListComponent, CreateProductComponent, EditProductComponent,
+     MainComponent
   ],
   imports: [
     BrowserModule, FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule, HttpClientModule,
+    // importing the routing by
+    // registerting Route Tabale on root of the application
     AppRoutingModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  // the NgModule specifies that TestElementComponent
+  // will be executed directly on DOM as createCustomElement()
+  // using @angular/elements package
+  entryComponents:[TestElementComponent],
   providers: [], // the angular service DI Registration
-  bootstrap: [DeptSenderComponent,EmpReceiverComponent]
+  bootstrap: [MainComponent]
 })
-export class AppModule { }
+export class AppModule {
+ // the AppModule instance in the Browser will inform to
+ // the browser that the Angular Module is exporting
+ // a custom element that has to be managed in
+ //  the CustomElementRegistry in Borwser's DOM
+ // use the 'Injector' from @angular/core for
+ // injecting the custom element
+ constructor(private injector: Injector){
+   // convert the Angular Component as the Element
+   const testElement = createCustomElement(TestElementComponent,
+      {injector:this.injector});
+    // define a custom HTML tag so that the element will be
+    // used in DOM
+     customElements.define('ng-test-element', testElement);
+ }
+
+}

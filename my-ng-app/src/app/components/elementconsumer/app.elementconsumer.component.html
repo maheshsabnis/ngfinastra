@@ -1,0 +1,16 @@
+<h2>The Component Consuming Angular Element</h2>
+    <div class="container">
+      <!--When subscribe to an event emitted by Angular Element
+       use on- prefix (ES 6 MDN) -->
+      <ng-test-element id="ele"
+       [Source]="names"
+       ></ng-test-element>
+       <hr>
+       <div class="container">
+         <strong>
+           The selected Value from Custom Element is {{value}}
+         </strong>
+       </div>
+    </div>
+
+

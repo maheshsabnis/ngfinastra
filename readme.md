@@ -475,8 +475,43 @@ Injectable: the decorator for defining class as a class to be registered as a An
             - secure calls
 2. Role based access for REST APIs calls
     - Routes with Guard     
-3. Attribute Directives
-4. Elements                           
+3. Sigle Page Application (SPA)
+    - Reduce the Postback to the server for DOM
+        - Get data from Server and generate the UI Dynamically based on Data using HTML Templates and Databinding 
+    - High Responsive View / UI navigation
+        - A collection of UI Templates along with the url keys
+            - Dictionary containg the Url Path Keys and its corresponding UI Template
+    - @angular/router
+        - RouterModule
+            - Provides an Object Model for SPA in Angular
+            - Object Model
+                - Route
+                    - The class that defies Dictionary Entry for Routing   
+                        - Propertis
+                            - 'path': the URL
+                            - component: thecomponent to navigate to
+                            - redirectTo: if path is not found then defult URL to redirect
+                            - children: [Child Route Array aka Routes object]
+                            - loadChildren: Lazy Loading of Modules
+                            - CanActivate: For Guarded Routing aka Role Based Routing Access
+                            - data: define a role for which the route path is activated      
+                - Routes
+                    - Collection of Route       
+                - Router
+                    - Class for Explicit Route Navigation
+                    - Using  'navigate([path])'     
+                - ActivatedRoute
+                    - Managing Routes with Parameterized Routes     
+                - [routerLink], the attribute directive for Routing
+                    - <a [routerLink]='['<path>']'>
+                - <router-outlet></router-outlet>
+                    - A Custom Component Directive that will render the component under navigation based on 'path' requested             
+4. Elements    
+    - Installing Angular Elements 
+        - npm install --save @angular/elements
+    - To make the element interactive perform following
+        - define properties decorated with @Input() decorator
+        - define event(s) using EventEmitter<T> and decorate the event using @Output                           
 
 
 
@@ -492,4 +527,10 @@ Injectable: the decorator for defining class as a class to be registered as a An
     - Make sure that the EmpName starts from Upper Case Character (Hint: Use Regular Expression) (Immediate)
     - Write a custom validator that will check if the EmpNo is already Present (Immediate)
 4. Create a Custom re-usable component that will show vaidation summary at the bottom of the page (later in seond half)      
+
 5. CReate a Search Component that will have a TextBox. This component will act as a Gloabl / Site Level search for the vaious components currently loaded. Lets this component accept the Search String e.g. Manufacturer = "IBM". The page will have 3 components i.e. SearchComponent and components showing data of Products, Orders. When the value as "IBM" entered in searched textbox, Only products manufcaturered by IBM and Orders for IBM products to be shown in Products and Orders component    
+6. CReate a DataTable as Angular Element with following behavior (Immediate in Lab Session)
+    - Accept a Property 'DataSource' of the type array
+    - The Table Columns and Rows must be generated based on data present in DataSource
+    - The Element must have an event that will emit the selected row data to its consumer
+    - The Element must have 'CanDelete' property, if this property is true then each row should generate as Delete button. When this button is clicked the record must be deleted from its consumer.  

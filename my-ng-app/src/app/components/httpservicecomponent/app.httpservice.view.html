@@ -1,0 +1,44 @@
+<div class="container">
+  <input type="button" value="Get" class="btn btn-success"
+   (click)="loadData()">
+  <br>
+  <input type="button" value="Post" class="btn btn-warning"
+   (click)="save()">
+  <br>
+</div>
+<hr>
+<div class="container">
+  <strong>
+    {{products|json}}
+  </strong>
+</div>
+<hr>
+<strong>
+  {{message}}
+</strong>
+<hr>
+<h2>The Token Base Calls</h2>
+<table class="table table-bordered table-striped">
+  <tbody>
+    <tr>
+      <td>
+        <input type="button" value="Create New User" class="btn btn-danger" (click)="createUser()">
+      </td>
+      <td>
+        <input type="button" value="Login" class="btn btn-success" (click)="loginUser()">
+      </td>
+      <td>
+        <input type="button" value="Get Data" class="btn btn-warning" (click)="getData()">
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h3>The Response from Secure Service</h3>
+<div>
+  <strong>
+    {{responsProducts|json}}
+  </strong>
+</div>
+<hr>
+<strong>{{newmessage}}</strong>

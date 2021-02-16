@@ -1,0 +1,27 @@
+<div class="container">
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>
+          Product Row Id
+        </th>
+        <th>
+          Product Id
+        </th>
+        <th>
+          Product Name
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let prd of products">
+        <td>{{prd.ProductRowId}}</td>
+        <td>{{prd.ProductId}}</td>
+        <td>{{prd.ProductName}}</td>
+        <td>
+          <input type="button" value="edit" (click)="navigateToEdit(prd.ProductRowId)">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
