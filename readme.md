@@ -474,7 +474,23 @@ Injectable: the decorator for defining class as a class to be registered as a An
             - post() / put() , mandatory
             - secure calls
 2. Role based access for REST APIs calls
+    - If REST Calls with repeated values in request headers
+        - then create a Http Request Interceptor to intercept the outgoing calls to add / modify the header vaues or request parameters
+            - @angular/common/http
+                - HttpInterceptor
+                    - interface to intercept each outgoing Http Request
+                        - intercept(HttpRequest, HttpHandler)
+                - HttpRequest
+                    - Represent outgoing request
+                - HttpEvent
+                    - Monitor an execution of Request and the received response and take action on the received response by the client application.
+                - HttpHandler
+                    - Handle the request for any modification of headers values and construct the request with odified values and forward it  
     - Routes with Guard     
+        - Object Model for Protecting the Angular Routes from UnAuthorized Users
+            - CanActivate
+                - interface implement the Guarg Service that is used to mprotect the Routes
+                    - 'canActivate(ActivateRouteSnapshot, RouteStateSnapshot): Observable<boolenan | UrlTree> | Promise<boolean> | boolean | UrlTree' method
 3. Sigle Page Application (SPA)
     - Reduce the Postback to the server for DOM
         - Get data from Server and generate the UI Dynamically based on Data using HTML Templates and Databinding 
@@ -506,6 +522,13 @@ Injectable: the decorator for defining class as a class to be registered as a An
                     - <a [routerLink]='['<path>']'>
                 - <router-outlet></router-outlet>
                     - A Custom Component Directive that will render the component under navigation based on 'path' requested             
+        Feature Modules
+            - Shared modules those will contain components, services, directives.
+            - These can be 
+                - Shared as reusable module across other modules
+                - Can be Lazy-loaded in the parent angular application            
+            - For rendering of components and directves the feature modules uses 'CommonModule'
+                - This CommonModule will help BrowserModule to manage rendering of the Components and Directives of feature module in parent application.     
 4. Elements    
     - Installing Angular Elements 
         - npm install --save @angular/elements
@@ -514,8 +537,40 @@ Injectable: the decorator for defining class as a class to be registered as a An
         - define event(s) using EventEmitter<T> and decorate the event using @Output                           
 
 
-
-
+5. Custom Attribute Directive
+    - the class decorated with @Directive() decorator from @angular/core
+        - the 'selector' property will be used to define the name of the directive when it will be appled on HTML elements
+    - Use to define a behavior of DOM element
+        - ElementRef
+            - Class for Targetting to DOM element to apply the directive
+        - Renderer2
+            - Then class used to define rendering of DOM element after the directive is activated    
+    - Define Input Properties to accept data
+        - @Input() decorated properties to accept data from parent component
+        - The Input Decorated property will be used for PropertyBinding to activate the directive on DOM element
+    - Define Business Logic 
+        - Logc for directive
+    - Define events for interaction
+        - The events using which the directive will be activate on component
+        - Use @HostListener() decorator, applied on methods of Directive to activate the business logic of the directive
+6. Angular Material
+    - @angular/material
+        - Material Design for Componets for Angular Apps 
+            - Featured Components
+                - Ready Customized UI
+                - Properties
+                - Events
+        - npm install --save @angular/material @angular/cdk    
+            - CDK, the component development toolkit
+        - For Angular CLI
+            - ng add @angular/material
+        - import {<component>} from @angular/materal/<component> 
+            - AutoComplete
+                - @angular/material/autocomplete
+                    - import {MatAutoCompleteModule} from  @angular/material/autocomplete
+                        - MatAutocomplete Directive
+                            - mat-autocomplete selector
+                    - This must ne linked with the HTML input:text element              
 # Angular Hands-on-Lab
 
 1. Create a Calculator Component like Calculator on Windows OD / Linux / MacOS (Immediate)
@@ -535,3 +590,9 @@ Injectable: the decorator for defining class as a class to be registered as a An
     - The Element must have an event that will emit the selected row data to its consumer
     - The Element must have 'CanDelete' property, if this property is true then each row should generate as Delete button. When this button is clicked the record must be deleted from its consumer.  
 7. Modify The Routing App by completing the Create / Edit View for Performing Create and Edit operations. Modify the ProductList for having the Delete button to delete the record  by navigating the DeleteComponent. This component will show the record to be deleted. (Mandatory)    
+8. Using the Angular Material Table Component perform the following
+    - The Table should Show data received from the HttpService (Mandator and immediate)
+    - Make sure that, the data is shown in 4 pages in Table (Mandatory and Immediate)
+        - Each page should have the size as 5 records
+    - When a row is selected (selection event of Table), display the data of selected row in dialog-box which is having Save and Cancel buttons (Mandatory and Immediate)
+        - The End-User should be able to update row by making the call to HttpService (optiona)    

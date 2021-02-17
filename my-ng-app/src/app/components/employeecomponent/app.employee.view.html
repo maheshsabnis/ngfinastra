@@ -49,6 +49,22 @@
   <br>
   <div class="contaier">
     <table class="table table-bordered table-striped">
+      <tbody>
+        <tr>
+          <td>
+            <input type="radio" name="r" (click)="color = 'red'">Red
+          </td>
+          <td>
+            <input type="radio" name="r" (click)="color = 'blue'">Blue
+          </td>
+          <td>
+            <input type="radio" name="r" (click)="color = 'yellow'">Yellow
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <table class="table table-bordered table-striped">
       <thead>
         <tr>
           <th>EmpNo</th>
@@ -59,7 +75,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let emp of employees" (click)="getSelectedEmp(emp)">
+        <tr *ngFor="let emp of employees" (click)="getSelectedEmp(emp)"
+         [setcolor]="color">
           <td>{{emp.EmpNo}}</td>
           <td>{{emp.EmpName}}</td>
           <td>{{emp.DeptName}}</td>

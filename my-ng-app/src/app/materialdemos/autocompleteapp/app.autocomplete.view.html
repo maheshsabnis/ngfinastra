@@ -1,0 +1,47 @@
+<h2>The Material AutoComplete Demo</h2>
+<input type="text" class="form-control"
+  placeholder="Select Name"
+  matInput
+  [matAutocomplete]="autoname">
+<!--Associate the mat-autocomplete with input:text element
+  #autoname="matAutoComplete" is an id set for the
+mat-auto-complete
+matInput, is an custom attribute directive to set the behavior for
+ auto-complete
+ [matAutocomplete] is a custom attribute directive that will link the
+ data from mat-autocomplete with input:text element
+-->
+<mat-autocomplete #autoname="matAutocomplete" >
+  <mat-option *ngFor="let name of names" [value]="name">
+     {{name}}
+  </mat-option>
+</mat-autocomplete>
+<br>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+   <!-- Position Column -->
+   <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="weight">
+    <th mat-header-cell *matHeaderCellDef> Weight </th>
+    <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="symbol">
+    <th mat-header-cell *matHeaderCellDef> Symbol </th>
+    <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

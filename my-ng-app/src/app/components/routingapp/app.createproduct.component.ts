@@ -14,6 +14,11 @@ import { Router } from "@angular/router";
       <strong>{{message}}</strong>
     <br/>
     <a [routerLink]="['']">Back to List</a>
+    <br/>
+    <h2>The Child-Routing aka Sub-Routing</h2>
+    <a [routerLink]="['employee']">Load Employee</a>
+    <br/>
+    <router-outlet></router-outlet>
   `
 })
 export class CreateProductComponent implements OnInit {

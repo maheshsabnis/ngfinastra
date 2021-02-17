@@ -1,3 +1,4 @@
+import { EmployeeComponent } from './components/employeecomponent/app.employee.component';
 import { EditProductComponent } from './components/routingapp/app.editproduct.component';
 import { CreateProductComponent } from './components/routingapp/app.createproduct.component';
 import { ProductListComponent } from './components/routingapp/app.productlist.component';
@@ -8,9 +9,16 @@ import { RouterModule, Routes } from '@angular/router';
 // define route table
 const routes: Routes = [
   {path:'', component: ProductListComponent},
-  {path:'create', component: CreateProductComponent},
+  {path:'create', component: CreateProductComponent,
+   children:[
+     {path: 'employee', component:EmployeeComponent}
+   ]},
   // parameterized route
   {path:'edit/:id', component: EditProductComponent},
+  // loadChildren: this will perform the module lookup
+  // in dynamically loaded js file in the browser
+  {path: 'lazy', loadChildren:()=> import('./../lib/app.lazy.module')
+       .then(module=>module.LazyModule)},
   {path: '**', redirectTo: ''} // redirect to root
 ];
 

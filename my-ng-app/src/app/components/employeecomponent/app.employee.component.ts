@@ -13,11 +13,13 @@ export class EmployeeComponent implements OnInit {
   departments = Departments;
   designations = Designations;
   columnHeaders: Array<string>;
+  color:string;
   constructor() {
     this.emp = new Employee();
     this.employees = new Array<Employee>();
     this.logic = new EmpLogic();
     this.columnHeaders = new Array<string>();
+    this.color ='';
    }
 
   ngOnInit(): void {

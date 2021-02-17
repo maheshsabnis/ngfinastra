@@ -1,0 +1,23 @@
+<h2>The Http Intercept Service</h2>
+<table class="table table-bordered table-striped">
+  <tbody>
+    <tr>
+
+      <td>
+        <input type="button" value="Login" class="btn btn-success" (click)="loginUser()">
+      </td>
+      <td>
+        <input type="button" value="Get Data" class="btn btn-warning" (click)="getData()">
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h3>The Response from Secure Service</h3>
+<div>
+  <strong>
+    {{responsProducts|json}}
+  </strong>
+</div>
+<hr>
+<strong>{{newmessage}}</strong>

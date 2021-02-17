@@ -1,3 +1,7 @@
+import { AutoCompleteComponent } from './materialdemos/autocompleteapp/app.autocomplete.component';
+import { ColorDirective } from './directives/attributedirective/app.color.diretive';
+import { HttpInterceptComponent } from './components/httpinterceptedcalls/app.httpintercept.component';
+import { SecurityInterceptorService } from './services/app.httpinterceptor.service';
 import { MainComponent } from './components/routingapp/app.main.component';
 import { EditProductComponent } from './components/routingapp/app.editproduct.component';
 import { CreateProductComponent } from './components/routingapp/app.createproduct.component';
@@ -11,7 +15,7 @@ import { BrowserModule } from '@angular/platform-browser';
 // FormsModule: USed for Basic Angular Forms and ngModel for two-way binding
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 // HttpClientModule for Http Communication from Angular App
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EmployeeComponent } from "./components/employeecomponent/app.employee.component";
@@ -30,8 +34,15 @@ import { createCustomElement } from "@angular/elements";
 
 // importing the component that will act as an Element
 import { TestElementComponent } from "./elements/app.test.element";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// importing the AutoComplete Material
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from '@angular/material/core';
 
 
+import {MatTableModule} from '@angular/material/table';
 
 // BrowserModule: The module responsible for rendering the Angular application in the browser
 // We can have 'only-one' instance of BrowserModule per angular application
@@ -41,25 +52,36 @@ import { TestElementComponent } from "./elements/app.test.element";
     AppComponent, EmployeeComponent,DropDownComponent,
     EmployeeReactiveFormComponent,HttpServiceComponent,
     DeptSenderComponent,EmpReceiverComponent,
-    TestElementComponent,
+    TestElementComponent, HttpInterceptComponent,
      ElementConsumerComponent,
      ProductListComponent, CreateProductComponent, EditProductComponent,
-     MainComponent
+     MainComponent, ColorDirective,
+     AutoCompleteComponent
   ],
   imports: [
     BrowserModule, FormsModule,
     ReactiveFormsModule, HttpClientModule,
     // importing the routing by
     // registerting Route Tabale on root of the application
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatAutocompleteModule,
+    MatDatepickerModule, MatNativeDateModule,
+    MatTableModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   // the NgModule specifies that TestElementComponent
   // will be executed directly on DOM as createCustomElement()
   // using @angular/elements package
   entryComponents:[TestElementComponent],
-  providers: [], // the angular service DI Registration
-  bootstrap: [MainComponent]
+  // define the HTTP_INTERCEPTOR for a Angular Service
+  // to intercept outgoing calls
+  // useClass: The class used for interception
+  // multi: intercept each outgoing call  from the service
+  providers: [
+    {provide:HTTP_INTERCEPTORS, useClass:SecurityInterceptorService, multi:true}
+  ], // the angular service DI Registration
+  bootstrap: [AutoCompleteComponent]
 })
 export class AppModule {
  // the AppModule instance in the Browser will inform to
@@ -76,5 +98,4 @@ export class AppModule {
     // used in DOM
      customElements.define('ng-test-element', testElement);
  }
-
 }

@@ -13,6 +13,9 @@ import { Component, OnInit } from '@angular/core';
             <td>
               <a [routerLink]="['create']">Create a new Product</a>
             </td>
+            <td>
+              <a [routerLink]="['lazy']">Lazy</a>
+            </td>
          </tr>
       </tbody>
     </table>
