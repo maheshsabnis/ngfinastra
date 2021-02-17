@@ -1,0 +1,6 @@
+
+<h1>The Lit Element Demo</h1>
+<input type="text" [(ngModel)]="myname">
+<hr>
+<simple-element [name]="myname"
+ on-btn-click="receiveData($event)"></simple-element>

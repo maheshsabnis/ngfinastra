@@ -534,7 +534,28 @@ Injectable: the decorator for defining class as a class to be registered as a An
         - npm install --save @angular/elements
     - To make the element interactive perform following
         - define properties decorated with @Input() decorator
-        - define event(s) using EventEmitter<T> and decorate the event using @Output                           
+        - define event(s) using EventEmitter<T> and decorate the event using @Output         
+    4.a. The LitElements are JavaScript Agnostic
+        - npm install --save lit-element
+            - The LitElement base class and the property system to define element, its properties and events
+        - npm install --save lit-html
+            - Provide the custom element registry         
+            - Manage the rendering
+        - The Shadow-DOM
+            - Encapsulation on the LitElements for 
+                - Rendering
+                - Property Changes
+                - Event-Bubbling         
+        - in app.module.ts that contains NgModule
+            - import the liteleemnt file
+                - e.g. import './litelementsdemo/app.simple.litelement           
+        - to bubble-up events from LitElement to its container using JavaScript Custom Events
+            - Define a custom event using 'CustomEvent()' object of JavaScript
+            - Use 'dispatchEvent()' method of LitElement to bubble-up the event
+            - The component must subscribe to the event as   standard JavaScript
+                - 'on-<event-name>'
+                    - e.g. on-btn-click
+                - the event data will be received as $event                      
 
 
 5. Custom Attribute Directive

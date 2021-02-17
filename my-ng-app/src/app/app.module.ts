@@ -1,3 +1,4 @@
+import { SimpleEleementComponent } from './components/litelementcomponent/app.simple.element.component';
 import { AutoCompleteComponent } from './materialdemos/autocompleteapp/app.autocomplete.component';
 import { ColorDirective } from './directives/attributedirective/app.color.diretive';
 import { HttpInterceptComponent } from './components/httpinterceptedcalls/app.httpintercept.component';
@@ -44,6 +45,10 @@ import { MatNativeDateModule } from '@angular/material/core';
 
 import {MatTableModule} from '@angular/material/table';
 
+
+// import the listeleemnt
+import './litelementsdemo/app.simple.litelement';
+
 // BrowserModule: The module responsible for rendering the Angular application in the browser
 // We can have 'only-one' instance of BrowserModule per angular application
 
@@ -56,7 +61,8 @@ import {MatTableModule} from '@angular/material/table';
      ElementConsumerComponent,
      ProductListComponent, CreateProductComponent, EditProductComponent,
      MainComponent, ColorDirective,
-     AutoCompleteComponent
+     AutoCompleteComponent,
+     SimpleEleementComponent
   ],
   imports: [
     BrowserModule, FormsModule,
@@ -81,7 +87,7 @@ import {MatTableModule} from '@angular/material/table';
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass:SecurityInterceptorService, multi:true}
   ], // the angular service DI Registration
-  bootstrap: [AutoCompleteComponent]
+  bootstrap: [SimpleEleementComponent]
 })
 export class AppModule {
  // the AppModule instance in the Browser will inform to
